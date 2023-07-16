@@ -4,8 +4,8 @@ const OrderController = {
 
     createOrder: async function (req, res) {
         try {
-            const { user, items } = req.body
-            const newOrder = new OrderModel({ user, items })
+            const { user, items, status } = req.body
+            const newOrder = new OrderModel({ user, items, status })
             await newOrder.save()
             return res.json({ success: true, data: newOrder, message: "order created" })
         } catch (ex) {

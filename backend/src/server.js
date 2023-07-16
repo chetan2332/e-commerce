@@ -26,7 +26,7 @@ app.use('/api/cart', CartRoutes)
 app.use('api/order', OrderRoutes)
 
 
-// Initial Connections
+// Initial Connections  
 const URL = process.env.MONGO_DB
 mongoose.connect(URL)
 

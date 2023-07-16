@@ -33,6 +33,27 @@ const UserController = {
             return res.json({ success: false, message: ex, })
         }
     },
+
+    updateUser: async function (req, res) {
+        try {
+            const userId = req.params.id;
+            const updatedData = req.body;
+
+            const updatedUser = UserModel.findOneAndUpdate(
+                { _id: userId },
+                updatedData,
+                { new: true }
+            )
+
+            if (!updatedUser) {
+                throw "User not found"
+            }
+
+            return res.json({ success: true, data: updatedUser })
+        } catch (ex) {
+            return res.json({ success: false, message: ex })
+        }
+    }
 }
 
 module.exports = UserController
