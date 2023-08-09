@@ -1,3 +1,8 @@
+// ignore_for_file: must_be_immutable
+
+import 'package:equatable/equatable.dart';
+import 'package:frontend/data/model/cart/cart_model.dart';
+
 import '../user/user_model.dart';
 
 class OrderModel extends Equatable {
@@ -34,16 +39,16 @@ class OrderModel extends Equatable {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = sId;
     data['user'] = user!.toJson();
     data['items'] =
         items!.map((item) => item.toJson(objectMode: true)).toList();
-    data['status'] = this.status;
-    data['razorPayOrderId'] = this.razorPayOrderId;
-    data['totalAmount'] = this.totalAmount;
-    data['updatedOn'] = this.updatedOn?.toIso8601String();
-    data['createdOn'] = this.createdOn?.toIso8601String();
+    data['status'] = status;
+    data['razorPayOrderId'] = razorPayOrderId;
+    data['totalAmount'] = totalAmount;
+    data['updatedOn'] = updatedOn?.toIso8601String();
+    data['createdOn'] = createdOn?.toIso8601String();
     return data;
   }
 

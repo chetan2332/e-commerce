@@ -3,7 +3,13 @@ import 'package:flutter/cupertino.dart';
 class LinkButton extends StatelessWidget {
   final String text;
   final void Function()? onPressed;
-  const LinkButton(this.text, this.onPressed, {super.key});
+  final Color? color;
+  const LinkButton({
+    super.key,
+    this.color,
+    this.onPressed,
+    required this.text,
+  });
 
   @override
   Widget build(BuildContext context) {

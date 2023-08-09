@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/data/model/user/user_model.dart';
 import 'package:frontend/data/repositories/user_repository.dart';
@@ -16,8 +14,6 @@ class UserCubit extends Cubit<UserState> {
     final userDetails = await Preferences.fetchUserDetails();
     String? email = userDetails['email'];
     String? password = userDetails['password'];
-    log(email.toString());
-    log(password.toString());
     if (email == null || password == null) {
       emit(UserLoggedOutState());
     } else {
@@ -25,8 +21,12 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
-  void _emitLoggedInState(UserModel userModel, String email, String password) {
-    Preferences.saveuserDetails(email, password);
+  void _emitLoggedInState(
+    UserModel userModel,
+    String email,
+    String password,
+  ) async {
+    await Preferences.saveuserDetails(email, password);
     emit(UserLoggedInState(userModel));
   }
 
@@ -62,8 +62,21 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
-  void signOut() {
-    Preferences.clear();
+  Future<bool> updateUser(UserModel userModel) async {
+    emit(UserLoadingState());
+    try {
+      UserModel updatedUser = await _userRepository.updateUser(userModel);
+      emit(UserLoggedInState(updatedUser));
+      return true;
+    } catch (ex) {
+      emit(UserErrorState(ex.toString()));
+      return false;
+    }
+  }
+
+  void signOut() async {
+    emit(UserLoadingState());
+    await Preferences.clear();
     emit(UserLoggedOutState());
   }
 }

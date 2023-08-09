@@ -22,7 +22,7 @@ class ProductRepository {
 
   Future<List<ProductModel>> fetchProductsByCategory(String categoryId) async {
     try {
-      Response response = await _api.get('/product/$categoryId');
+      Response response = await _api.get('/product/category/$categoryId');
       ApiResponse apiResponse = ApiResponse.fromResponse(response);
       if (!apiResponse.success) {
         throw apiResponse.message.toString();

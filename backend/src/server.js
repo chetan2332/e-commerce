@@ -23,12 +23,16 @@ app.use("/api/user", UserRoutes)
 app.use("/api/category", CategoryRoutes)
 app.use('/api/product', ProductRoutes)
 app.use('/api/cart', CartRoutes)
-app.use('api/order', OrderRoutes)
+app.use('/api/order', OrderRoutes)
 
 
 // Initial Connections  
 const URL = process.env.MONGO_DB
-mongoose.connect(URL)
+try {
+    mongoose.connect(URL).catch((ex) => console.log(ex))
+} catch (ex) {
+    console.log(ex)
+}
 
 const PORT = process.env.PORT
 app.listen(PORT, () => console.log(`Server started at PORT : ${PORT}`))

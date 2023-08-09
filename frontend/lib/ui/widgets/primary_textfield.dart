@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class PrimaryTextField extends StatelessWidget {
+  final String? initialValue;
+  final void Function(String)? onChanged;
   final String labelText;
   final TextEditingController? controller;
   final bool obscureText;
@@ -12,6 +14,8 @@ class PrimaryTextField extends StatelessWidget {
     this.controller,
     this.obscureText = false,
     this.validator,
+    this.initialValue,
+    this.onChanged,
   });
 
   @override
@@ -27,6 +31,8 @@ class PrimaryTextField extends StatelessWidget {
         ),
         labelText: labelText,
       ),
+      onChanged: onChanged,
+      initialValue: initialValue,
     );
   }
 }

@@ -28,8 +28,8 @@ const CartController = {
 
             // deleting the item if it already exists
             await CartModel.findOneAndUpdate(
-                { user, "items.produt": product },
-                { $pull: { items: { product: product, quantity: quantity } } }
+                { user, "items.product": product },
+                { $pull: { items: { product: product } } }
             )
 
             const newCart = await CartModel.findOneAndUpdate(
@@ -37,7 +37,7 @@ const CartController = {
                 { $push: { items: { product, quantity } } },
                 { new: true }
             ).populate("items.product")
-            return res.json({ success: true, data: newCart, message: "Product added to cart" })
+            return res.json({ success: true, data: newCart.items, message: "Product added to cart" })
         } catch (ex) {
             return res.json({ success: true, message: ex })
         }
@@ -51,7 +51,7 @@ const CartController = {
                 { $pull: { items: { product } } },
                 { new: true },
             ).populate("items.product")
-            return res.json({ success: true, data: newCart, message: "Product added to cart" })
+            return res.json({ success: true, data: newCart.items, message: "Product removed from cart" })
         } catch (ex) {
             return res.json({ success: true, message: ex })
         }

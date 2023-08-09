@@ -4,7 +4,9 @@ import 'package:frontend/core/theme.dart';
 class PrimaryButton extends StatelessWidget {
   final String text;
   final void Function()? onPressed;
-  const PrimaryButton({super.key, required this.text, this.onPressed});
+  final Color? color;
+  const PrimaryButton(
+      {super.key, required this.text, this.onPressed, this.color});
 
   @override
   Widget build(BuildContext context) {

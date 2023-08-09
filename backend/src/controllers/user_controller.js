@@ -39,7 +39,7 @@ const UserController = {
             const userId = req.params.id;
             const updatedData = req.body;
 
-            const updatedUser = UserModel.findOneAndUpdate(
+            const updatedUser = await UserModel.findOneAndUpdate(
                 { _id: userId },
                 updatedData,
                 { new: true }

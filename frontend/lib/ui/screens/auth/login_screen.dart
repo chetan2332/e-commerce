@@ -76,7 +76,12 @@ class LoginScreen extends StatelessWidget {
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: [LinkButton('Forget Password?', () {})],
+                    children: [
+                      LinkButton(
+                        onPressed: () {},
+                        text: 'Forget Password?',
+                      )
+                    ],
                   ),
                   const GapWidget(),
                   PrimaryButton(
@@ -92,7 +97,9 @@ class LoginScreen extends StatelessWidget {
                         style: TextStyles.body2,
                       ),
                       const GapWidget(),
-                      LinkButton("Sign Up", () => swichToSignupScreen(context))
+                      LinkButton(
+                          text: "Sign Up",
+                          onPressed: () => swichToSignupScreen(context))
                     ],
                   )
                 ],

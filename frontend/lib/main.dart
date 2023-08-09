@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/core/routes.dart';
 import 'package:frontend/core/theme.dart';
+import 'package:frontend/logic/cubits/cart_cubit/cart_cubit.dart';
 import 'package:frontend/logic/cubits/category_cubit/category_cubit.dart';
+import 'package:frontend/logic/cubits/order_cubit/order_cubit.dart';
 import 'package:frontend/logic/cubits/product_cubit/product_cubit.dart';
 import 'package:frontend/logic/cubits/user_cubit/user_cubit.dart';
 import 'package:frontend/ui/screens/splash/splash_screen.dart';
@@ -26,6 +28,15 @@ class EcommerceApp extends StatelessWidget {
         BlocProvider(create: (context) => UserCubit()),
         BlocProvider(create: (context) => CategoryCubit()),
         BlocProvider(create: (context) => ProductCubit()),
+        BlocProvider(
+          create: (context) => CartCubit(BlocProvider.of<UserCubit>(context)),
+        ),
+        BlocProvider(
+          create: (context) => OrderCubit(
+            BlocProvider.of<UserCubit>(context),
+            BlocProvider.of<CartCubit>(context),
+          ),
+        ),
       ],
       child: MaterialApp(
         onGenerateRoute: Routes.onGenerateRoutes,

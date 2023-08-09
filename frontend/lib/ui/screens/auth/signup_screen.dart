@@ -89,7 +89,9 @@ class SignUpScreen extends StatelessWidget {
                       style: TextStyles.body2,
                     ),
                     const GapWidget(),
-                    LinkButton("Log In", () => swichToLoginScreen(context))
+                    LinkButton(
+                        text: "Log In",
+                        onPressed: () => swichToLoginScreen(context))
                   ],
                 )
               ],
